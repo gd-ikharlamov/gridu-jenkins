@@ -1,0 +1,13 @@
+---
+- hosts: cloudera-cluster
+  become: yes
+  user: centos
+  roles:
+      - add-scm-user
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+      - add-scm-user
+      - send-email

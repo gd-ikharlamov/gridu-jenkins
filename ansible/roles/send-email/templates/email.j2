@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cloudera cluster access</title>
+    <style>
+        ul {
+            margin-left: 0;
+            padding-left: 0;
+        }
+        ul li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        Using cloudera manager:
+        <ol>
+            <li>Open browser and go to: {{ cloudera_manager_url }}</li>
+            <li>Enter credentials to access cluster web interface:
+                <ul>
+                    <li><b>Username:</b> {{ user_name }}</li>
+                    <li><b>Password:</b> {{ user_password }}</li>
+                </ul>
+            </li>
+        </ol>
+    </p>
+    <p>
+        Cloudera cluster private ssh key in attachment.
+    </p>
+    <p>
+        Instructions for ssh access: https://docs.google.com/document/d/185vb6EmfL5qmBUJSR0UybH9sMxTwwOGllKHujlukQ6U/
+    </p>
+</body>
+
+</html>

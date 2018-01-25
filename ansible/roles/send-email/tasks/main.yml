@@ -1,0 +1,11 @@
+---
+- mail:
+    host: smtp.gmail.com
+    port: 587
+    username: "{{ email_user }}"
+    password: "{{ email_password }}"
+    to: "{{ user_email }}"
+    subject: Cloudera cluster credentilas
+    body: "{{ lookup('template', '{{ role_path }}/templates/email.j2') }}"
+    attach: ./{{ user_name }}
+  delegate_to: localhost
