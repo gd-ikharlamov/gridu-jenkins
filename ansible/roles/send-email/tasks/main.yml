@@ -2,8 +2,11 @@
 - mail:
     host: smtp.gmail.com
     port: 587
+    secure: starttls
     username: "{{ email_user }}"
     password: "{{ email_password }}"
+    subtype: html
+    charset: utf8
     to: "{{ user_email }}"
     subject: Cloudera cluster credentilas
     body: "{{ lookup('template', '{{ role_path }}/templates/email.j2') }}"

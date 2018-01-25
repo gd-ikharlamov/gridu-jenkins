@@ -1,14 +1,13 @@
 ---
+- name: "Generate ssh key for {{ user_name }}"
+  local_action: shell yes | ssh-keygen -b 2048 -t rsa -f ./{{ user_name }} -q -N ''
+  become: no
+  run_once: true
+
 - name: "Add {{ user_name }}"
   user:
     name: "{{ user_name }}"
     state: present
-
-- name: "Generate ssh key for {{ user_name }}"
-  local_action:
-      shell: "yes | ssh-keygen -b 2048 -t rsa -f ./{{ user_name }} -q -N '' "
-  become: no
-  run_once: true
 
 - name: "Allow ssh for {{ user_name }}"
   authorized_key:

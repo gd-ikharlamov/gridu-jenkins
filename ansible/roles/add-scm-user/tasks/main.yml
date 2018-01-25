@@ -14,8 +14,6 @@
   set_fact:
     cm_api_url: "{{ cloudera_manager_url }}/api/{{ api_version.content }}"
 
-- debug: msg="{{ user_password }}"
-
 - name: Create Cloudera Manager user
   uri:
     url: "{{ cm_api_url }}/users/"

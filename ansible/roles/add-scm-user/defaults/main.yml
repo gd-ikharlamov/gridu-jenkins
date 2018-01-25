@@ -8,5 +8,5 @@ scm_admin_pass: !vault |
           6435663933663763370a356438313035393537646562306336666131613966656561313230303538
           3334
 user_name: ikharlamov
-user_password: "{{ lookup('password', './{{ user_name }}.pwd length=12') }}"
+user_password: "{{ lookup('password', './{{ user_name }}.pwd length=12 chars=ascii_letters,digits') }}"
 user_role: ROLE_ADMIN
