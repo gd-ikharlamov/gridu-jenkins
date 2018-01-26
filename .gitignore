@@ -1,3 +1,4 @@
 *.retry
 .vault_file
 ./data/
+notes.txt
