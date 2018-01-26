@@ -19,7 +19,7 @@ node {
                                 extras: "-e user_name=${user_name} -e user_email=${user_email}",
                                 playbook: 'add-user',
                                 sudo: true,
-                                sudoUser: centos,
+                                sudoUser: 'centos',
                                 vaultCredentialsId: '06ee78b8-2e44-4741-9c60-6ecf7b052f96'
             }
         }
