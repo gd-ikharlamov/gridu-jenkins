@@ -10,7 +10,7 @@ node {
 
 
         stage('Pull repository') {
-            git 'git_repo'
+            git git_repo
         }
 
         stage('Create credentials') {
