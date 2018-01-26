@@ -1,0 +1,35 @@
+#grep -oP "docker:x:\K\d+" /etc/group
+version: '2'
+
+services:
+    jenkins:
+        build:
+            context: ./jenkins
+            args:
+                docker_gid: 1001
+        image: localhost/jenkins:latest
+        container_name: jenkins
+        volumes:
+            - $PWD/data/jenkins:/opt/jenkins/:z
+            - /var/run/docker.sock:/var/run/docker.sock:z
+        ports:
+            - 8080:8080
+    #
+    # certbot:
+    #     build:
+    #         context: ./certbot
+    #     image: localhost/certbot:latest
+    #     container_name: certbot
+    #     volumes:
+    #         - $PWD/data/nginx/cert:/opt/cert:z
+    #
+    # nginx:
+    #     build:
+    #         context: ./nginx
+    #     image: localhost/nginx-cicd:latest
+    #     container_name: nginx-cicd
+    #     volumes:
+    #         - $PWD/data/nginx/cert:/opt/cert:z
+    #     ports:
+    #         - 80:8080
+    #         - 443:8443
