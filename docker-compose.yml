@@ -9,6 +9,7 @@ services:
                 docker_gid: 1001
         image: localhost/jenkins:latest
         container_name: jenkins
+        restart: always
         volumes:
             - $PWD/data/jenkins:/opt/jenkins/:z
             - /var/run/docker.sock:/var/run/docker.sock:z
