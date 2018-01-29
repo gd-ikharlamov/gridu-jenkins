@@ -1,6 +1,8 @@
 Host 13.57.68.214
   User centos
+  ForwardAgent yes
 
 Host 10.0.0.*
   User centos
   ProxyJump 13.57.68.214
+  ForwardAgent yes
