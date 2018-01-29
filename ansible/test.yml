@@ -1,0 +1,6 @@
+- hosts: 13.57.68.214
+  gather_facts: no
+  become: yes
+  user: centos
+  tasks:
+      - ping:

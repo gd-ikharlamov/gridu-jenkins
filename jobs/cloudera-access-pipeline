@@ -17,7 +17,7 @@ node {
             dir ('ansible') {
                 ansiblePlaybook credentialsId: 'cd033632-8981-46d1-9e24-39150ff08af7',
                                 extras: "-vvv -b --become-user=centos -e user_name=${user_name} -e user_email=${user_email}",
-                                playbook: 'add-user.yml',
+                                playbook: 'test.yml',
                                 sudo: false,
                                 vaultCredentialsId: '06ee78b8-2e44-4741-9c60-6ecf7b052f96'
             }
