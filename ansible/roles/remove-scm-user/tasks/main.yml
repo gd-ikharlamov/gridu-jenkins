@@ -1,0 +1,24 @@
+---
+- name: Get Cloudera Manager API version
+  uri:
+    url: "{{ cloudera_manager_url }}/api/version"
+    method: GET
+    status_code: 200
+    user: "{{ scm_admin_user }}"
+    password: "{{ scm_admin_pass }}"
+    force_basic_auth: yes
+    return_content: yes
+  register: api_version
+
+- name: Set cm_api_url variable
+  set_fact:
+    cm_api_url: "{{ cloudera_manager_url }}/api/{{ api_version.content }}"
+
+- name: "Remove Cloudera Manager user {{ user_name }}"
+  uri:
+    url: "{{ cm_api_url }}/users/{{ user_name }}"
+    method: DELETE
+    status_code: 200
+    user: "{{ scm_admin_user }}"
+    password: "{{ scm_admin_pass }}"
+    force_basic_auth: yes

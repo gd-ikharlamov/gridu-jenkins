@@ -1,0 +1,13 @@
+---
+- hosts: cloudera-cluster
+  gather_facts: no
+  become: yes
+  remote_user: centos
+  roles:
+      - remove-ssh-user
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+      - remove-scm-user
