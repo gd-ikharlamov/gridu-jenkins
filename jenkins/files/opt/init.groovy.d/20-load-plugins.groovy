@@ -5,7 +5,7 @@ import java.util.logging.Logger
 def logger = Logger.getLogger("")
 def installed = false
 def initialized = false
-def pluginParameter="ansible git workflow-aggregator job-dsl role-strategy google-login"
+def pluginParameter="ansible git workflow-aggregator job-dsl role-strategy google-login ssh-agent"
 def plugins = pluginParameter.split()
 logger.info("" + plugins)
 def instance = Jenkins.getInstance()
