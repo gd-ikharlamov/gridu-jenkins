@@ -2,7 +2,7 @@
 
 def buildUserID = currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause).properties.userId
 def userEmail = buildUserID
-def sshUser = userEmail.find("\\w+")
+def userName = userEmail.find("\\w+")
 
 node {
 
@@ -21,7 +21,7 @@ node {
 
             dir ('ansible') {
                 sshagent(['53c758d1-8266-45fd-8671-45ba7cdd7b16']) {
-                    ansiblePlaybook extras: "-e user_name=${userEmail} -e user_email=${sshUser}",
+                    ansiblePlaybook extras: "-e user_name=${userName} -e user_email=${userEmail}",
                                     playbook: 'add-user.yml',
                                     vaultCredentialsId: 'c34b41b4-78c9-4f50-bbc3-1ac09c8b04bc'
                 }
