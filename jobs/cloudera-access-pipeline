@@ -16,7 +16,7 @@ node {
         stage('Create credentials') {
 
             dir ('ansible') {
-                sshagent(['3c748d77-a9bd-415e-969b-d97be760769a']) {
+                sshagent(['53c758d1-8266-45fd-8671-45ba7cdd7b16']) {
                     ansiblePlaybook extras: "-e user_name=${user_name} -e user_email=${user_email}",
                                     playbook: 'add-user.yml',
                                     vaultCredentialsId: 'c34b41b4-78c9-4f50-bbc3-1ac09c8b04bc'
