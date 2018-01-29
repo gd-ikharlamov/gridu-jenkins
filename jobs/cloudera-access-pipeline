@@ -18,7 +18,7 @@ node {
             dir ('ansible') {
                 sshagent(['3c748d77-a9bd-415e-969b-d97be760769a']) {
                     ansiblePlaybook credentialsId: '',
-                                    extras: "-b --become-user=centos -e user_name=${user_name} -e user_email=${user_email}",
+                                    extras: "-e user_name=${user_name} -e user_email=${user_email}",
                                     playbook: 'add-user.yml',
                                     sudo: false,
                                     vaultCredentialsId: '06ee78b8-2e44-4741-9c60-6ecf7b052f96'
