@@ -1,2 +1,6 @@
+Host 13.57.68.214
+  User centos
+
 Host 10.0.0.*
-  ProxyJump centos@13.57.68.214
+  User centos
+  ProxyJump 13.57.68.214

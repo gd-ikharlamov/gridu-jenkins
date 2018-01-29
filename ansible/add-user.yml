@@ -2,7 +2,7 @@
 - hosts: cloudera-cluster
   gather_facts: no
   become: yes
-  user: centos
+  remote_user: centos
   roles:
       - add-ssh-user
 

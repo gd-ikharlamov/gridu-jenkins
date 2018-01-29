@@ -1,7 +1,0 @@
-- hosts: 13.57.68.214
-  gather_facts: no
-  become: yes
-  user: centos
-  connection: paramiko
-  tasks:
-      - ping:
