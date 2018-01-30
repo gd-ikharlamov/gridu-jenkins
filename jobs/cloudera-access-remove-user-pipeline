@@ -13,7 +13,7 @@ node {
             git git_repo
         }
 
-        stage('Create credentials') {
+        stage('Remove credentials') {
 
             dir ('ansible') {
                 sshagent(['53c758d1-8266-45fd-8671-45ba7cdd7b16']) {
