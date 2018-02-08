@@ -5,18 +5,45 @@
     <title>Cloudera cluster access</title>
     <style>
         ul {
-            margin-left: 0;
             padding-left: 0;
         }
+
         ul li {
             list-style-type: none;
+        }
+
+        .code-block {
+            background-color: #f7f7f9;
+            font-family: Monaco, Menlo, Consolas, "Courier New", monospace!important;
+            border: 1px solid #00000026;
+            border-radius: 4px;
+            margin: 0 0 0 2.5em;
+            padding: 2px 3px 1px;
+            display: block;
+            word-wrap: normal;
+            width: fit-content;
+        }
+
+        .code-inline {
+            background-color: #f7f7f9;
+            font-family: Monaco,Menlo,Consolas,"Courier New",monospace!important;
+            font-size: .75rem;
+            line-height: .75rem;
+            color: #d72b3f;
+            border: 1px solid #e1e1e8;
+            padding: 2px 3px 1px;
+            word-wrap: normal;
+            width: fit-content;
+            border-radius: 3px;
         }
     </style>
 </head>
 
 <body>
-    <p>
+    <h3>
         Using cloudera manager:
+    </h3>
+    <p>
         <ol>
             <li>Open browser and go to: {{ cloudera_manager_url }}</li>
             <li>Enter credentials to access cluster web interface:
@@ -27,12 +54,55 @@
             </li>
         </ol>
     </p>
+
+    <h3>
+    SSH access to cluster:
+</h3>
     <p>
-        Cloudera cluster private ssh key in attachment.
+        <ol>
+            <li>Download private key fiel from attachment and place it to ~/.ssh/</li>
+            <li>Set rights on file to 600</li>
+            <li>Add to ssh config file (~/.ssh/config, create if not exist)</li>
+        </ol>
+
+
+        <div class="code-block">
+<pre>Host gu_manager
+  HostName 13.56.208.40
+  User {{ user_name }}
+  IdentityFile ~/.ssh/{{ user_name }}
+Host gu_gateway
+  HostName 13.57.68.214
+  User {{ user_name }}
+  IdentityFile ~/.ssh/{{ user_name }}
+Host gu_master
+  HostName 52.9.115.55
+  User {{ user_name }}
+  IdentityFile ~/.ssh/{{ user_name }}</pre>
+        </div>
+
     </p>
+
+    <h3>
+        Connect to cluster’s gateway node:
+    </h3>
     <p>
-        Instructions for ssh access: https://docs.google.com/document/d/185vb6EmfL5qmBUJSR0UybH9sMxTwwOGllKHujlukQ6U/
+
+        Gateway is special kind of node in cluster having access to all nodes cluster like HDFS, Hive or Spark nodes and having config files and cli/repl scripts to access different systems of the cluster.
+    </br>To get there over ssh you need to:
+        <ol>
+            <li>Ssh connect to proxy node:
+                <div class="code-inline">ssh gu_gateway</div>
+            </li>
+            <li>Now you should be connected to gateway node. Run
+                <div class="code-inline">hadoop fs -ls /</div>
+                to check you have access to HBDF master node. You should see list of files on root of HDFS catalog.
+            </li>
+        </ol>
+
+
     </p>
+
 </body>
 
 </html>
