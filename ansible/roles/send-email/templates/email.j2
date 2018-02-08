@@ -17,8 +17,7 @@
             font-family: Monaco, Menlo, Consolas, "Courier New", monospace!important;
             border: 1px solid #00000026;
             border-radius: 4px;
-            margin: 0 0 0 2.5em;
-            padding: 2px 3px 1px;
+            padding: 0em 1em 0em 1em;
             display: block;
             word-wrap: normal;
             width: fit-content;
@@ -26,7 +25,7 @@
 
         .code-inline {
             background-color: #f7f7f9;
-            font-family: Monaco,Menlo,Consolas,"Courier New",monospace!important;
+            font-family: Monaco, Menlo, Consolas, "Courier New", monospace!important;
             font-size: .75rem;
             line-height: .75rem;
             color: #d72b3f;
@@ -62,12 +61,10 @@
         <ol>
             <li>Download private key fiel from attachment and place it to ~/.ssh/</li>
             <li>Set rights on file to 600</li>
-            <li>Add to ssh config file (~/.ssh/config, create if not exist)</li>
-        </ol>
-
-
-        <div class="code-block">
-<pre>Host gu_manager
+            <li>Add to ssh config file (~/.ssh/config, create if not exist)
+                <div class="code-block">
+                    <pre>
+Host gu_manager
   HostName 13.56.208.40
   User {{ user_name }}
   IdentityFile ~/.ssh/{{ user_name }}
@@ -78,8 +75,14 @@ Host gu_gateway
 Host gu_master
   HostName 52.9.115.55
   User {{ user_name }}
-  IdentityFile ~/.ssh/{{ user_name }}</pre>
-        </div>
+  IdentityFile ~/.ssh/{{ user_name }}
+</pre>
+                </div>
+            </li>
+        </ol>
+
+
+
 
     </p>
 
@@ -89,7 +92,7 @@ Host gu_master
     <p>
 
         Gateway is special kind of node in cluster having access to all nodes cluster like HDFS, Hive or Spark nodes and having config files and cli/repl scripts to access different systems of the cluster.
-    </br>To get there over ssh you need to:
+        </br>To get there over ssh you need to:
         <ol>
             <li>Ssh connect to proxy node:
                 <div class="code-inline">ssh gu_gateway</div>
