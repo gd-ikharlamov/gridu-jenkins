@@ -1,4 +1,4 @@
 user_name: ikharalamov
 user_password: "{{ lookup('password', './{{ user_name }}.pwd length=12 chars=ascii_letters,digits') }}"
 user_email: ikharlamov@griddynamics.com
-cloudera_manager_url: http://13.56.208.40:7180
+cloudera_manager_url: http://cloudera.gridu.aws.griddynamics.net:7180
