@@ -1,0 +1,55 @@
+---
+- name: list github members
+  uri:
+    url: "{{ github_api_url }}/members"
+    headers: "Authorization={{ github_auth_token }}"
+    method: GET
+    status_code: 200
+    return_content: yes
+  register: org_members
+
+# - debug: msg={{ org_members.json | json_query("[*]") }}
+
+# - name: Add github repo
+#   uri:
+#     url: "{{ github_api_url }}/repos/"
+#     headers: "Authorization={{ github_auth_token }}"
+#     method: POST
+#     body_format: json
+#     body: "{{ lookup('template', '{{ role_path }}/templates/repo.json.j2') }}"
+#     status_code: 201
+#     return_content: yes
+#   register: repos
+
+# - debug: msg={{ repos.json | json_query("[*]") }}
+- name: list github repos
+  uri:
+    url: "{{ github_api_url }}/repos"
+    headers: "Authorization={{ github_auth_token }}"
+    method: GET
+    status_code: 200
+    return_content: yes
+  register: org_repos
+
+# - debug: msg={{ org_repos.json | json_query("[*].name") }}
+
+- name: add collaborators to github repo
+  uri:
+    url: "{{ github_api_url }}/repos/{{ repo_name }}/collaborators/{{ item }}"
+    headers: "Authorization={{ github_auth_token }}"
+    method: PUT
+    status_code: 200
+  with_items:
+    - proffesor
+    - student
+
+- name: get collaborators
+  uri:
+    url: "{{ github_api_url }}/repos/{{ repo_name }}/collaborators"
+    headers: "Authorization={{ github_auth_token }}"
+    method: GET
+    status_code: 200
+    return_content: yes
+  register: repo_collaborators
+
+- debug: msg={{ repo_collaborators.json | json_query("[*]") }}
