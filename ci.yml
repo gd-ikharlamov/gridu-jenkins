@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    jenkins:
+        build:
+            context: ./containers/jenkins
+            args:
+                docker_gid: 1001
+        image: localhost/jenkins:latest
+        container_name: jenkins
+        restart: always
+        volumes:
+            - $PWD/data/jenkins:/var/jenkins/:z
+            - /var/run/docker.sock:/var/run/docker.sock:z
+        ports:
+            - 8080:8080

@@ -22,7 +22,7 @@ if ('admin' in users_s) {
     user.save()
 }
 else {
-    println "--> creating local admin user"
+    println "--- creating local admin user"
 
     hudsonRealm.createAccount('admin', 'admin')
 }
