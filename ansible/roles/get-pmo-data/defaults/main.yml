@@ -1,0 +1,25 @@
+pmo_auth_url: https://pmo.griddynamics.net/j_spring_security_check
+
+pmo_api_url: https://pmo.griddynamics.net/service
+pmo_api_user: pmo-api-gridu
+pmo_api_pass: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37356665663439326561356132363837613764646338656533633664383265336537643435383531
+          6433663466653138633937646232393532323361636666640a353962393763373334333636623637
+          66343564323336356437393435636438386137653831613566643238613064616261633262383564
+          3335373533316534310a356335623561666466323936326461313630366166353831393866386637
+          3961
+
+tmp_dir: /tmp/gridu
+
+pmo_api_endpoints:
+    employee_active:
+        endpoint: /api/employee/active
+    people_accounts:
+        endpoint: /people-accounts
+    project_active:
+        endpoint: /project/active
+    accounts:
+        endpoint: /accounts
+    people_employees:
+        endpoint: /v1/people/employees

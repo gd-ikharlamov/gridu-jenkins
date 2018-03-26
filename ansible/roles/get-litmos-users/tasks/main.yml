@@ -1,0 +1,36 @@
+---
+- name: Create tmp dir
+  file:
+    path: "{{ tmp_dir }}"
+    state: directory
+
+- name: Get litmos users
+  uri:
+    url: "{{ litmos_api_url }}/users/details{{ litmos_api_suffix }}"
+    return_content: yes
+    dest: "{{ tmp_dir }}/litmos_users.json"
+
+- name: Add 'em' to litmos_users.json
+  shell: |
+         jq --slurpfile em_sync_pmo  {{ tmp_dir }}/em_sync_pmo.json  \
+            --slurpfile litmos_users {{ tmp_dir }}/litmos_users.json \
+            -n -f {{ role_path }}/files/em-sync.jq > {{ tmp_dir }}/em-sync.json
+
+- name: Update litmos users
+  uri:
+    url: "{{ litmos_api_url }}/users/{{ item.Id }}{{ litmos_api_suffix_upload }}"
+    method: PUT
+    status_code: 200
+    body_format: json
+    body: "{{ item }}"
+    headers:
+      Content-Type: "application/json"
+    return_content: yes
+  register: result
+  until: "result.status == 200"
+  retries: 5
+  delay: 60
+  with_items: "{{ em_sync }}"
+  vars:
+      em_sync: "{{lookup('file','{{ tmp_dir }}/em-sync.json')}}"
+

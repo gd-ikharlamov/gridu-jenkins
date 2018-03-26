@@ -1,0 +1,37 @@
+---
+- name: PMO auth
+  uri:
+    url: "{{ pmo_auth_url }}"
+    method: POST
+    status_code: 302
+    body: "j_username={{ pmo_api_user }}&j_password={{ pmo_api_pass }}"
+    headers:
+      Content-Type: "application/x-www-form-urlencoded"
+  register: pmo_login
+
+- name: Create tmp dir
+  file:
+    path: "{{ tmp_dir }}"
+    state: directory
+
+- name: Get json from api endpoint
+  uri:
+    url: "{{ pmo_api_url }}{{ item.value.endpoint }}"
+    return_content: yes
+    headers:
+      Cookie: "{{ pmo_login.set_cookie }}"
+    dest: "{{ tmp_dir }}/{{ item.key }}.json"
+  with_dict: "{{ pmo_api_endpoints }}"
+
+- name: Merge and filter json files
+  shell: |
+         jq --slurpfile project_active   {{ tmp_dir }}/project_active.json  \
+            --slurpfile people_accounts  {{ tmp_dir }}/people_accounts.json \
+            --slurpfile employee_active  {{ tmp_dir }}/employee_active.json \
+            -n -f {{ role_path }}/files/gridu.jq > {{ tmp_dir }}/gridu.json
+
+- name: Prepare json for em sync with litmos
+  shell: |
+         jq --slurpfile people_employees {{ tmp_dir }}/people_employees.json \
+            --slurpfile employee_active  {{ tmp_dir }}/employee_active.json \
+            -n -f {{ role_path }}/files/em_sync_pmo.jq > {{ tmp_dir }}/em_sync_pmo.json
